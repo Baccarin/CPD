@@ -2,11 +2,13 @@ package principal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import aviao.Aeroporto;
 import aviao.Aviao;
 import model.Fila;
+import model.Lista;
 import model.Pilha;
 
 public class Principal {
@@ -16,11 +18,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 
-//		testaPilha();
-//		System.out.println("-------------");
-//		testaFila();
-//		System.out.println("-------------");
-		testaAeroporto();
+		testaLista();
 
 	}
 
@@ -56,6 +54,22 @@ public class Principal {
 		fila.imprimeFila();
 	}
 
+	public static void testaLista() {
+		int remove = 4;
+		Lista lista = new Lista();
+		for (int i = 0; i < TAMANHO; i++) {
+			Double valor = (double) Math.round((Math.random() * 8));
+			lista.adiciona(valor);
+			if (i % 2 == 0) {
+				if (remove != 0) {
+					lista.remove(valor);
+					remove--;
+				}
+			}
+		}
+		lista.imprime();
+	}
+
 	public static void testaAeroporto() {
 		adicionaOperacoes();
 		Aeroporto aeroporto = new Aeroporto("Aeroporto de Pelotas");
@@ -89,6 +103,7 @@ public class Principal {
 				aeroporto.decolar();
 				break;
 			case 9:
+				System.out.println("Adeus!");
 				sc.close();
 				System.exit(1);
 				break;
@@ -112,6 +127,5 @@ public class Principal {
 
 	public static void imprimeOperacoes() {
 		lista.forEach(op -> System.out.println(op));
-		System.out.println("\n");
 	}
 }
